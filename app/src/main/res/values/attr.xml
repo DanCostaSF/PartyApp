@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SeekBarCustom">
+        <attr name="value_seek" format="integer"/>
+        <attr name="type_seek" format="string"/>
+    </declare-styleable>
+</resources>

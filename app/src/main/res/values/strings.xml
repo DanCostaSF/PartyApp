@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Party App</string>
+    <string name="homens">Homens: (%s)</string>
+    <string name="prox">Próximo</string>
+</resources>

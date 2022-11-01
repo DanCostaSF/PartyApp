@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/guestsFragment">
+
+    <fragment
+        android:id="@+id/guestsFragment"
+        android:name="br.com.android.partyapp.ui.fragments.GuestsFragment"
+        android:label="GuestsFragment"
+        tools:layout="@layout/fragment_guests">
+        <action
+            android:id="@+id/action_guestsFragment_to_itemsFragment"
+            app:destination="@id/itemsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemsFragment"
+        android:name="br.com.android.partyapp.ui.fragments.ItemsFragment"
+        android:label="ItemsFragment"
+        tools:layout="@layout/fragment_items">
+        <action
+            android:id="@+id/action_itemsFragment_to_listItemsFragment"
+            app:destination="@id/listItemsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listItemsFragment"
+        android:name="br.com.android.partyapp.ui.fragments.ListItemsFragment"
+        android:label="ListItemsFragment"
+        tools:layout="@layout/fragment_list_items"/>
+</navigation>
