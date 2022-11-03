@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import br.com.android.partyapp.R
 import br.com.android.partyapp.commons.BaseFragment
+import br.com.android.partyapp.commons.observeAndNavigateBack
 import br.com.android.partyapp.databinding.FragmentListItemsBinding
 import br.com.android.partyapp.ui.viewmodel.PartyViewModel
 
@@ -23,6 +24,11 @@ class ListItemsFragment : BaseFragment<FragmentListItemsBinding>(
     }
 
     override fun setupObservers() {
+        observeAndNavigateBack(viewModel.onNavigateBack)
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.doneNavigateBack()
     }
 }

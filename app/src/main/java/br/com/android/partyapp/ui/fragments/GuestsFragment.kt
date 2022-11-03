@@ -34,6 +34,4 @@ class GuestsFragment : BaseFragment<FragmentGuestsBinding>(
 
     override fun setupObservers() {
     }
-
-
 }

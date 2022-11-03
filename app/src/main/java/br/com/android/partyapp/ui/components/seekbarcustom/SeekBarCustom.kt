@@ -16,7 +16,12 @@ class SeekBarCustom @JvmOverloads constructor(
     private val defStyle: Int = 0,
 ) : ConstraintLayout(context, attrs, defStyle) {
 
-    private val binding = SeekBarCustomBinding.inflate(LayoutInflater.from(context), this, true)
+    private val binding = SeekBarCustomBinding.inflate(
+        LayoutInflater.from(context),
+        this,
+        true
+    )
+
     var value_seek: Int? = null
         set(value) {
             binding.textSeekValue.text = "($value)"
@@ -55,8 +60,8 @@ class SeekBarCustom @JvmOverloads constructor(
             value_seek?.let { value ->
                 if (value < binding.seekBar.max) {
                     value_seek = value_seek?.plus(1)
-                    value_seek.let {
-                        binding.seekBar.progress = it!!
+                    value_seek?.let {
+                        binding.seekBar.progress = it
                     }
                 }
             }
@@ -66,8 +71,8 @@ class SeekBarCustom @JvmOverloads constructor(
             value_seek?.let { value ->
                 if (value > binding.seekBar.min) {
                     value_seek = value_seek?.minus(1)
-                    value_seek.let {
-                        binding.seekBar.progress = it!!
+                    value_seek?.let {
+                        binding.seekBar.progress = it
                     }
                 }
             }
