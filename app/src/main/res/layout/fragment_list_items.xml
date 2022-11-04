@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="br.com.android.partyapp.ui.viewmodel.ListItemViewModel" />
+            type="br.com.android.partyapp.ui.viewmodel.ViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:navigationIcon="@drawable/ic_back_24"
-                app:navigationOnClickListener="@{() -> vm.onNavigationClick()}"
+                app:navigationOnClickListener="@{() -> vm.onNavigationClick2()}"
                 app:titleCentered="true"
                 app:title="Lista de itens"
                 app:titleTextColor="@color/white"/>

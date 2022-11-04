@@ -7,13 +7,13 @@ import br.com.android.partyapp.R
 import br.com.android.partyapp.commons.BaseFragment
 import br.com.android.partyapp.commons.navTo
 import br.com.android.partyapp.databinding.FragmentGuestsBinding
-import br.com.android.partyapp.ui.viewmodel.GuestsViewModel
+import br.com.android.partyapp.ui.viewmodel.ViewModel
 
 class GuestsFragment : BaseFragment<FragmentGuestsBinding>(
     R.layout.fragment_guests
 ) {
 
-    private val viewModel: GuestsViewModel by activityViewModels()
+    private val viewModel: ViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

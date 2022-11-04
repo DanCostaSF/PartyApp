@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="br.com.android.partyapp.ui.viewmodel.ItemsViewModel" />
+            type="br.com.android.partyapp.ui.viewmodel.ViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

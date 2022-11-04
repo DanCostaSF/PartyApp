@@ -8,15 +8,13 @@ import br.com.android.partyapp.commons.BaseFragment
 import br.com.android.partyapp.commons.observeAndNavigateBack
 import br.com.android.partyapp.databinding.FragmentListItemsBinding
 import br.com.android.partyapp.ui.adapter.listitemsadapter.ListItemsAdapter
-import br.com.android.partyapp.ui.viewmodel.ItemsViewModel
-import br.com.android.partyapp.ui.viewmodel.ListItemViewModel
+import br.com.android.partyapp.ui.viewmodel.ViewModel
 
 class ListItemsFragment : BaseFragment<FragmentListItemsBinding>(
     R.layout.fragment_list_items
 ) {
 
-    private val listItemViewModel: ListItemViewModel by activityViewModels()
-    private val itemsViewModel: ItemsViewModel by activityViewModels()
+    private val itemsViewModel: ViewModel by activityViewModels()
     private lateinit var adapter: ListItemsAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,11 +28,11 @@ class ListItemsFragment : BaseFragment<FragmentListItemsBinding>(
     }
 
     override fun setupViewModel() {
-        binding.vm = listItemViewModel
+        binding.vm = itemsViewModel
     }
 
     override fun setupObservers() {
-        observeAndNavigateBack(listItemViewModel.onNavigateBack)
+        observeAndNavigateBack(itemsViewModel.onNavigateBack2)
 
         itemsViewModel.listTypes.observe(viewLifecycleOwner) {
             adapter.setData(it)
@@ -43,6 +41,6 @@ class ListItemsFragment : BaseFragment<FragmentListItemsBinding>(
 
     override fun onDestroy() {
         super.onDestroy()
-        listItemViewModel.doneNavigateBack()
+        itemsViewModel.doneNavigateBack2()
     }
 }

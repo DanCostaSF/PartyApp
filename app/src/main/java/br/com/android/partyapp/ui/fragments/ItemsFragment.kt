@@ -9,15 +9,13 @@ import br.com.android.partyapp.commons.navTo
 import br.com.android.partyapp.commons.observeAndNavigateBack
 import br.com.android.partyapp.databinding.FragmentItemsBinding
 import br.com.android.partyapp.ui.adapter.itemsadapter.ItemsAdapter
-import br.com.android.partyapp.ui.viewmodel.GuestsViewModel
-import br.com.android.partyapp.ui.viewmodel.ItemsViewModel
+import br.com.android.partyapp.ui.viewmodel.ViewModel
 
 class ItemsFragment : BaseFragment<FragmentItemsBinding>(
     R.layout.fragment_items
 ) {
 
-    private val itemsViewModel: ItemsViewModel by activityViewModels()
-    private val guestsViewModel: GuestsViewModel by activityViewModels()
+    private val itemsViewModel: ViewModel by activityViewModels()
 
     private lateinit var adapter: ItemsAdapter
 
@@ -51,17 +49,6 @@ class ItemsFragment : BaseFragment<FragmentItemsBinding>(
         itemsViewModel.listTypes.observe(viewLifecycleOwner) {
             adapter.setData(it)
         }
-
-        guestsViewModel.mansValue.observe(viewLifecycleOwner) {
-            itemsViewModel.postManValue(it)
-        }
-        guestsViewModel.womansValue.observe(viewLifecycleOwner) {
-            itemsViewModel.postWomanValue(it)
-        }
-        guestsViewModel.childrensValue.observe(viewLifecycleOwner) {
-            itemsViewModel.postChildrenValue(it)
-        }
-
     }
 
     override fun onDestroy() {
