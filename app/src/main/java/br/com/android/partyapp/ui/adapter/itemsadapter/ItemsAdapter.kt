@@ -1,4 +1,4 @@
-package br.com.android.partyapp.ui.adapter
+package br.com.android.partyapp.ui.adapter.itemsadapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,13 +7,13 @@ import br.com.android.partyapp.data.model.TypeItem
 import br.com.android.partyapp.data.model.TypeItems
 import br.com.android.partyapp.databinding.ItemsPartyAdapterBinding
 
-class ItemsPartyAdapter(
+class ItemsAdapter(
     private val onItemClicked: (TypeItem?) -> Unit
-) : RecyclerView.Adapter<ItemsPartyAdapter.ItemPartyVH>() {
+) : RecyclerView.Adapter<ItemsAdapter.ItemsVH>() {
 
     private val data = mutableListOf<TypeItems>()
 
-    private lateinit var adapterParty: InnerPartyAdapter
+    private lateinit var adapterParty: InnerItemsAdapter
 
     fun setData(list: List<TypeItems>) {
         this.data.clear()
@@ -21,21 +21,20 @@ class ItemsPartyAdapter(
         notifyDataSetChanged()
     }
 
-    inner class ItemPartyVH(val binding: ItemsPartyAdapterBinding) :
+    inner class ItemsVH(val binding: ItemsPartyAdapterBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: TypeItems) = binding.run {
             title.text = item.title
-            adapterParty = InnerPartyAdapter {
+            adapterParty = InnerItemsAdapter {
                 onItemClicked(it)
             }
             recycler.adapter = adapterParty
             adapterParty.setData(item.items)
-
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ItemPartyVH(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ItemsVH(
         ItemsPartyAdapterBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
@@ -43,7 +42,7 @@ class ItemsPartyAdapter(
         )
     )
 
-    override fun onBindViewHolder(holder: ItemPartyVH, position: Int) {
+    override fun onBindViewHolder(holder: ItemsVH, position: Int) {
         holder.bind(data[position])
     }
 

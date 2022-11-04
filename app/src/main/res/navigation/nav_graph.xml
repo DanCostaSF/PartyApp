@@ -13,7 +13,8 @@
         tools:layout="@layout/fragment_guests">
         <action
             android:id="@+id/action_guestsFragment_to_itemsFragment"
-            app:destination="@id/itemsFragment" />
+            app:destination="@id/itemsFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/itemsFragment"
@@ -22,7 +23,8 @@
         tools:layout="@layout/fragment_items">
         <action
             android:id="@+id/action_itemsFragment_to_listItemsFragment"
-            app:destination="@id/listItemsFragment" />
+            app:destination="@id/listItemsFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/listItemsFragment"

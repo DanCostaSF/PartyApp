@@ -1,16 +1,14 @@
-package br.com.android.partyapp.ui.adapter
+package br.com.android.partyapp.ui.adapter.itemsadapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.android.partyapp.data.model.TypeItem
-import br.com.android.partyapp.data.model.TypeItems
 import br.com.android.partyapp.databinding.InnerRecyclerItemBinding
-import br.com.android.partyapp.databinding.ItemsPartyAdapterBinding
 
-class InnerPartyAdapter(
+class InnerItemsAdapter(
     private val onItemClicked: (TypeItem) -> Unit
-) : RecyclerView.Adapter<InnerPartyAdapter.PartyAdapterVH>() {
+) : RecyclerView.Adapter<InnerItemsAdapter.InnerItemsVH>() {
 
     private val data = mutableListOf<TypeItem>()
 
@@ -20,10 +18,13 @@ class InnerPartyAdapter(
         notifyDataSetChanged()
     }
 
-    inner class PartyAdapterVH(val binding: InnerRecyclerItemBinding) :
+    inner class InnerItemsVH(val binding: InnerRecyclerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: TypeItem) = binding.run {
+            if (item.selected) {
+                checkbox.isChecked = true
+            }
             txvItem.text = item.title
             viewSelect.setOnClickListener {
                 checkbox.isChecked = !checkbox.isChecked
@@ -33,7 +34,7 @@ class InnerPartyAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PartyAdapterVH(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = InnerItemsVH(
         InnerRecyclerItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
@@ -41,8 +42,7 @@ class InnerPartyAdapter(
         )
     )
 
-    override fun onBindViewHolder(holder: PartyAdapterVH, position: Int) {
-
+    override fun onBindViewHolder(holder: InnerItemsVH, position: Int) {
         holder.bind(data[position])
     }
 

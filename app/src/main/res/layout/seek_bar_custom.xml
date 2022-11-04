@@ -61,6 +61,7 @@
             android:layout_height="wrap_content"
             android:max="100"
             android:min="0"
+            android:thumbTint="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/plusButton"
             app:layout_constraintStart_toEndOf="@id/minusButton"

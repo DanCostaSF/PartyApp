@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="br.com.android.partyapp.ui.viewmodel.PartyViewModel" />
+            type="br.com.android.partyapp.ui.viewmodel.GuestsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -78,6 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/prox"
+                android:backgroundTint="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>

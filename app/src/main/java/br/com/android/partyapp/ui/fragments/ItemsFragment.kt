@@ -1,52 +1,71 @@
 package br.com.android.partyapp.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import br.com.android.partyapp.R
 import br.com.android.partyapp.commons.BaseFragment
+import br.com.android.partyapp.commons.navTo
 import br.com.android.partyapp.commons.observeAndNavigateBack
-import br.com.android.partyapp.data.model.TypeItem
-import br.com.android.partyapp.data.model.TypeItems
 import br.com.android.partyapp.databinding.FragmentItemsBinding
-import br.com.android.partyapp.ui.adapter.ItemsPartyAdapter
-import br.com.android.partyapp.ui.viewmodel.PartyViewModel
+import br.com.android.partyapp.ui.adapter.itemsadapter.ItemsAdapter
+import br.com.android.partyapp.ui.viewmodel.GuestsViewModel
+import br.com.android.partyapp.ui.viewmodel.ItemsViewModel
 
 class ItemsFragment : BaseFragment<FragmentItemsBinding>(
     R.layout.fragment_items
 ) {
 
-    private val viewModel: PartyViewModel by activityViewModels()
-    private lateinit var adapter: ItemsPartyAdapter
+    private val itemsViewModel: ItemsViewModel by activityViewModels()
+    private val guestsViewModel: GuestsViewModel by activityViewModels()
+
+    private lateinit var adapter: ItemsAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecycler()
+        setupNextButton()
+    }
+
+    private fun setupNextButton() {
+        binding.nextButton.setOnClickListener {
+            navTo(ItemsFragmentDirections.actionItemsFragmentToListItemsFragment())
+        }
     }
 
     private fun setupRecycler() {
-        adapter = ItemsPartyAdapter {
+        adapter = ItemsAdapter {
             it?.let {
-                viewModel.setSelectedItems(it)
+                itemsViewModel.setSelectedItems(it)
             }
         }
         binding.recycler.adapter = adapter
     }
 
     override fun setupViewModel() {
-        binding.vm = viewModel
+        binding.vm = itemsViewModel
     }
 
     override fun setupObservers() {
-        observeAndNavigateBack(viewModel.onNavigateBack)
-        viewModel.listTypes.observe(viewLifecycleOwner) {
+        observeAndNavigateBack(itemsViewModel.onNavigateBack)
+        itemsViewModel.listTypes.observe(viewLifecycleOwner) {
             adapter.setData(it)
         }
+
+        guestsViewModel.mansValue.observe(viewLifecycleOwner) {
+            itemsViewModel.postManValue(it)
+        }
+        guestsViewModel.womansValue.observe(viewLifecycleOwner) {
+            itemsViewModel.postWomanValue(it)
+        }
+        guestsViewModel.childrensValue.observe(viewLifecycleOwner) {
+            itemsViewModel.postChildrenValue(it)
+        }
+
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        viewModel.doneNavigateBack()
+        itemsViewModel.doneNavigateBack()
     }
 }
