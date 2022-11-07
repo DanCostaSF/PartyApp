@@ -11,6 +11,10 @@
     android:paddingEnd="20dp"
     tools:ignore="RtlSymmetry">
 
+    <LinearLayout
+        android:id="@+id/content_click"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <TextView
         android:id="@+id/title"
         android:layout_width="150dp"
@@ -20,6 +24,7 @@
         android:textColor="@color/black"
         tools:text="Titulo"
         app:drawableEndCompat="@drawable/ic_down_24" />
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"

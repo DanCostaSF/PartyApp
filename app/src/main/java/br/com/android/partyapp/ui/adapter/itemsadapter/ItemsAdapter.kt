@@ -1,8 +1,10 @@
 package br.com.android.partyapp.ui.adapter.itemsadapter
 
 import android.view.LayoutInflater
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import br.com.android.partyapp.commons.isVisible
 import br.com.android.partyapp.data.model.TypeItem
 import br.com.android.partyapp.data.model.TypeItems
 import br.com.android.partyapp.databinding.ItemsPartyAdapterBinding
@@ -31,6 +33,14 @@ class ItemsAdapter(
             }
             recycler.adapter = adapterParty
             adapterParty.setData(item.items)
+
+            contentClick.setOnClickListener {
+                if (recycler.visibility == VISIBLE) {
+                    binding.recycler.isVisible(false)
+                } else {
+                    binding.recycler.isVisible(true)
+                }
+            }
         }
     }
 

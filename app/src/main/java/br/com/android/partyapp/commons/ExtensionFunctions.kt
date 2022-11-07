@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 
 @BindingAdapter("isVisible")
 fun View.isVisible(visible: Boolean?) {
-    visibility = if (visible == true) View.VISIBLE else View.INVISIBLE
+    visibility = if (visible == true) View.VISIBLE else View.GONE
 }
 
 fun Fragment.navTo(directions: NavDirections) = findNavController().navigate(directions)
