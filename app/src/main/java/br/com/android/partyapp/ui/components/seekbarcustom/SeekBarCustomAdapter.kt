@@ -10,11 +10,12 @@ fun SeekBarCustom.setValueItemChanged(
 ) {
     value?.let {
         value_seek = it
+        valueSeek.value = it
     }
 }
 
 @InverseBindingAdapter(attribute = "app:value_item", event = "app:itemValueChanged")
-fun SeekBarCustom.getValueItemChanged(): Int = value_seek ?: 0
+fun SeekBarCustom.getValueItemChanged(): Int = valueSeek.value ?: 0
 
 @BindingAdapter("app:itemValueChanged")
 fun SeekBarCustom.setListener (

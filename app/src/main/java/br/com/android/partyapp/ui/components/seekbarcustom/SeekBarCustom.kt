@@ -7,6 +7,8 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.SeekBar
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
 import br.com.android.partyapp.R
 import br.com.android.partyapp.databinding.SeekBarCustomBinding
 
@@ -35,10 +37,20 @@ class SeekBarCustom @JvmOverloads constructor(
         }
 
     var valueCallback: (() -> Unit)? = null
+    val valueSeek =  MutableLiveData(0)
 
     init {
         setupAttr()
         setupButtonProgress()
+        initializeObservers()
+    }
+
+    private fun initializeObservers() {
+        val lifecycleOwner = (context as? LifecycleOwner?) ?: return
+
+        valueSeek.observe(lifecycleOwner) {
+            binding.seekBar.progress = it
+        }
     }
 
     private fun setupAttr() {
@@ -59,10 +71,7 @@ class SeekBarCustom @JvmOverloads constructor(
         binding.plusButton.setOnClickListener {
             value_seek?.let { value ->
                 if (value < binding.seekBar.max) {
-                    value_seek = value_seek?.plus(1)
-                    value_seek?.let {
-                        binding.seekBar.progress = it
-                    }
+                    valueSeek.postValue(valueSeek.value?.plus(1))
                 }
             }
         }
@@ -70,10 +79,7 @@ class SeekBarCustom @JvmOverloads constructor(
         binding.minusButton.setOnClickListener {
             value_seek?.let { value ->
                 if (value > binding.seekBar.min) {
-                    value_seek = value_seek?.minus(1)
-                    value_seek?.let {
-                        binding.seekBar.progress = it
-                    }
+                    valueSeek.postValue(valueSeek.value?.minus(1))
                 }
             }
         }
@@ -84,12 +90,14 @@ class SeekBarCustom @JvmOverloads constructor(
             SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
                 value_seek = p0?.progress
+                valueSeek.value = p0?.progress
                 valueCallback?.invoke()
             }
 
             override fun onStartTrackingTouch(p0: SeekBar?) {}
             override fun onStopTrackingTouch(p0: SeekBar?) {
                 value_seek = p0?.progress
+                valueSeek.value = p0?.progress
                 valueCallback?.invoke()
             }
         })

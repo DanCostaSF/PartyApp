@@ -1,5 +1,6 @@
 package br.com.android.partyapp.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import br.com.android.partyapp.data.model.TypeItem
@@ -73,27 +74,43 @@ class ViewModel : ViewModel() {
                     typeItem.selected = item.selected
                     when (typeItem.uidGroup) {
                         1 -> {
-                            typeItem.quantity = mansValue.value?.times(
-                                3
-                            )?.plus(
-                                womansValue.value?.times(2)!!
-                            )?.plus(
-                                childrensValue.value?.times(1)!!
-                            )
+                            calcGroup1(typeItem)
                         }
                         2 -> {
-                            typeItem.quantity = mansValue.value?.times(
-                                10
-                            )?.plus(
-                                womansValue.value?.times(7)!!
-                            )?.plus(
-                                childrensValue.value?.times(5)!!
-                            )
+                            calcGroup2(typeItem)
                         }
                     }
                 }
             }
         }
         listTypes.postValue(handleType)
+    }
+
+    private fun calcGroup1(typeItem: TypeItem) {
+        if (!typeItem.selected) {
+            typeItem.quantity = 0
+        } else {
+            typeItem.quantity = mansValue.value?.times(
+                3
+            )?.plus(
+                womansValue.value?.times(2)!!
+            )?.plus(
+                childrensValue.value?.times(1)!!
+            )
+        }
+    }
+
+    private fun calcGroup2(typeItem: TypeItem) {
+        if (!typeItem.selected) {
+            typeItem.quantity = 0
+        } else {
+            typeItem.quantity = mansValue.value?.times(
+                10
+            )?.plus(
+                womansValue.value?.times(7)!!
+            )?.plus(
+                childrensValue.value?.times(5)!!
+            )
+        }
     }
 }
