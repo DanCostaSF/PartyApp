@@ -7,9 +7,9 @@ import br.com.android.partyapp.data.model.TypeItems
 
 class ViewModel : ViewModel() {
 
-    val mansValue = MutableLiveData(0)
-    val womansValue = MutableLiveData(0)
-    val childrensValue = MutableLiveData(0)
+    var mansValue = 0
+    var womansValue = 0
+    var childrensValue = 0
 
     val onNavigateBack = MutableLiveData(false)
 
@@ -89,13 +89,7 @@ class ViewModel : ViewModel() {
         if (!typeItem.selected) {
             typeItem.quantity = 0
         } else {
-            typeItem.quantity = mansValue.value?.times(
-                3
-            )?.plus(
-                womansValue.value?.times(2)!!
-            )?.plus(
-                childrensValue.value?.times(1)!!
-            )
+            typeItem.quantity = (mansValue * 3) + (womansValue * 2)+ childrensValue
         }
     }
 
@@ -103,13 +97,7 @@ class ViewModel : ViewModel() {
         if (!typeItem.selected) {
             typeItem.quantity = 0
         } else {
-            typeItem.quantity = mansValue.value?.times(
-                10
-            )?.plus(
-                womansValue.value?.times(7)!!
-            )?.plus(
-                childrensValue.value?.times(5)!!
-            )
+            typeItem.quantity = (mansValue * 10) + (womansValue *7) + (childrensValue * 5)
         }
     }
 }
